@@ -13,6 +13,10 @@ def connect_db(app):
 class User(db.Model):
     __tablename__= "users"
 
+    def __repr__(self):
+        """Show user id, first and last name"""
+        return f"id{self.id} first:{self.first_name} last:{self.last_name}"
+
     id = db.Column(db.Integer,
                    primary_key=True,
                    autoincrement=True)
@@ -23,7 +27,8 @@ class User(db.Model):
                         nullable=True,
                         )
     image_url = db.Column(db.Text(),
-                          nullable=True)
+                          nullable=True,
+                          default='https://images.unsplash.com/photo-1735596717044-94c05d6c49dc?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
     
     def full_name(self):
         """Return full name of user"""
