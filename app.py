@@ -51,14 +51,14 @@ def add_new_user():
 @app.route('/users/<int:user_id>')
 def show_user(user_id):
     # """ Show information about specific user """
-    user = User.query.get(user_id)
-    return render_template('user_details.html', id=user_id, user=user)
+    user = User.query.get_or_404(user_id)
+    return render_template('users/user_details.html', id=user_id, user=user)
 
 @app.route('/users/<int:user_id>/edit')
 def edit_user_form(user_id):
     # """ Show edit page for user"""
     user = User.query.get(user_id)
-    return render_template('edit_user.html', id=user_id, user=user)
+    return render_template('users/edit_user.html', id=user_id, user=user)
 
 @app.route('/users/<int:user_id>/edit', methods=['POST'])
 def edits_user(user_id):
