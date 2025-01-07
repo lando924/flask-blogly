@@ -29,7 +29,8 @@ class User(db.Model):
     image_url = db.Column(db.Text(),
                           nullable=True,
                           default='https://images.unsplash.com/photo-1735596717044-94c05d6c49dc?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
-    
+   
+
     def full_name(self):
         """Return full name of user"""
         

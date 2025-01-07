@@ -27,26 +27,26 @@ def show_users():
     """Show all users"""
     users = User.query.all()
     print(users)
-    return render_template('users_listing.html', users=users)
+    return render_template('users/users_listing.html', users=users)
 
 @app.route('/users/new', methods=["GET"])
 def new_user_home():
     """Show a form to create a new User"""
-    return render_template('users/new.html')
+    return render_template('users/new_user.html')
 
 @app.route('/users/new', methods=["POST"])
 def add_new_user():    
     #  """Handle new user creation with form submission"""
     user = User(
-        first = request.form['first'],
-        last = request.form['last'],
-        image = request.form['image'] or None
+        first_name = request.form['first_name'],
+        last_name = request.form['last_name'],
+        image_url = request.form['image_url'] or None
     )
     
     db.session.add(user)
     db.session.commit()
     
-    return redirect('/users')
+    return redirect('users/users_listing.html')
 
 @app.route('/users/<int:user_id>')
 def show_user(user_id):
@@ -64,9 +64,9 @@ def edit_user_form(user_id):
 def edits_user(user_id):
     """ Process edit form """
     user = User.query.get_or_404(user_id)
-    user.first_name = request.form['first']
-    user.last_name = request.form['last']
-    user.image_url = request.form['url']
+    user.first_name = request.form['first_name']
+    user.last_name = request.form['last_name']
+    user.image_url = request.form['image_url']
     
     db.session.add(user)
     db.session.commit()

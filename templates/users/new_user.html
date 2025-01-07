@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'users/base.html' %}
 
 {% block content %}
 
@@ -12,11 +12,11 @@
 
 <form action="/users/new" method="POST">
     <label for="">First name</label>
-    <input type="text" name="first" placeholder="Enter a first name">
+    <input type="text" name="first_name" placeholder="Enter a first name">
     <label for="">Last name</label>
-    <input type="text" name="last" placeholder="Enter a last name">
+    <input type="text" name="last_name" placeholder="Enter a last name">
     <label for="">Image URL</label>
-    <input type="text" name="url" placeholder="Provide image for this user">
+    <input type="url" name="image_url" placeholder="Provide image for this user">
 
     <button id="save">Add</button>
 </form>
