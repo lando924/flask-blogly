@@ -2,13 +2,28 @@
 
 {% block content %}
 
-<img src="{{user.image_url}}" alt="">
+<img src="{{ user.image_url }}" alt="User Image">
 
 <h2>{{ user.full_name() }}</h2>
 
-<form>
-    <button id="edit" formaction="/users/{{ user.id }}/edit">Edit</button>
+<form method="GET" action="/users/{{ user.id }}/edit">
+    <button id="edit-user">Edit</button>
+</form>
+
+<form action="/users">
     <button id="delete" formmethod="POST" formaction="/users/{{ user.id }}/delete">Delete</button>
 </form>
+
+<div>
+    <h3>Posts</h3>
+    <ul id="posts">
+        {% for post in user.posts %}
+        <li><a href="/posts/{{ post.id }}">{{ post.title }}</a></li>
+        {% endfor %}
+    </ul>
+    <form method="GET" action="/users/{{ user.id }}/posts/new">
+        <button id="add-post">Add Post</button>
+    </form>
+</div>
 
 {% endblock %}
