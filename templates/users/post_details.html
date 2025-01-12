@@ -6,18 +6,19 @@
 
 <p>{{ post.content }}</p>
 
-<p><i>By {{ post.user.full_name() }}</i></p>
+<p><i>By {{ post.user.full_name() }} on {{post.created_at.strftime("%a %b %d, %Y, %I:%M %p") }}</i></p>
 
-<div>
-    <a href="/users/{{ post.user.id }}">
-        <button type="button" id="cancelpost">Cancel</button>
-    </a>
-    <a href="/posts/{{ post.id }}/edit">
-        <button type="button" id="edit">Edit</button>
-    </a>
-    <form action="/posts/{{ post.id }}/delete" method="POST">
-        <button type="submit" id="delete">Delete</button>
-    </form>
-</div>
+<p><b>Tags: </b>
+    {% for tag in post.tags %}
+        <button class="tags"><i>{{ tag.name }}</i></button>
+    {% endfor %}
+</p>
+
+<form action="" method="POST">
+<button formaction="/users/{{post.user.id}}" fomrmethod="GET"id="cancelpost">Cancel</button>
+<button formaction="/posts/{{post.id}}/edit" fomrmethod="GET"id="edit">Edit</button>
+<button formaction="/users/{{post.user.id}}/delete" fomrmethod="POST"id="delete">Delete</button>
+
+</form>
 
 {% endblock %}

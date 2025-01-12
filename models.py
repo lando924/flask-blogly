@@ -58,6 +58,39 @@ class Post(db.Model):
                         db.ForeignKey('users.id',
                         ondelete="CASCADE"))
     
+    tags = db.relationship('Tag', secondary='posts_tag', backref='posts')
+    
     def __repr__(self):
-        """ SHow user_id and post title"""
+        """ Show user_id and post title"""
         return f'<Name:{self.user.first_name} title:{self.title}>'    
+    
+     
+class PostTag(db.Model):
+     """Mapping of a post to a tag"""
+
+     __tablename__ = 'posts_tag'
+
+     post_id = db.Column(db.Integer,
+                         db.ForeignKey('posts.id'),
+                        primary_key=True)
+     tag_id = db.Column(db.Integer,
+                        db.ForeignKey('tags.id'),
+                        primary_key=True)
+     
+class Tag(db.Model):
+    """Tag Class"""
+
+    __tablename__ = 'tags'
+
+    id = db.Column(db.Integer,
+                    primary_key=True,
+                    autoincrement=True)
+    name = db.Column(db.String,
+                    unique=True, 
+                    nullable=False)
+    posts = db.relationship('Post', secondary='posts_tag', backref='tags')
+
+
+def __repr__(self):
+    """Show name of tag"""
+    return f'<Tag:{self.name}>'

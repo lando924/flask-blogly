@@ -9,11 +9,18 @@
     <input type="text" name="title" id="posttitle"> 
     
     <br>
- 
+
     <label for="content">Content</label>
     <textarea name="content" id="postcontent" cols="40" rows="3" required></textarea> 
     
     <br>
+
+    <div class="checkboxes">
+        {% for tag in tags %}
+            <input type="checkbox" name="{{tag.name}}" id="box">
+            <label for="" id="boxlabel">{{tag.name}}</label> <br>
+        {% endfor %}
+    </div>
   
     <button type="submit" id="addpost">Add Post</button>
     <a href="/users/{{ id }}">
